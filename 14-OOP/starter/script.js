@@ -68,7 +68,7 @@ console.log(arr.unique());
 const h1 = document.querySelector(`h1`);
 console.dir(x => x + 1);
 */
-
+/*
 // Coding Challenge 1:
 const Car = function (make, speed) {
   this.make = make;
@@ -93,3 +93,39 @@ BMW.accelerate();
 BMW.accelerate();
 BMW.brake();
 BMW.accelerate();
+*/
+
+// class expression
+// const PersonCl1 = class {};
+
+// class declaration
+class PersonCl2 {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Methods will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+}
+
+const jessica = new PersonCl2(`Jessica`, 1996);
+console.log(jessica);
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl2.prototype);
+
+// PersonCl2.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+jessica.greet();
+
+// 1. Classes are NOT hoisted
+// 2. Classes are first-class citizes
+// 3. Classes are executed in strict mode
