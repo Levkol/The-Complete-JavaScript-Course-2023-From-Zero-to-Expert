@@ -98,6 +98,7 @@ BMW.accelerate();
 // class expression
 // const PersonCl1 = class {};
 
+/*
 // class declaration
 class PersonCl2 {
   constructor(fullName, birthYear) {
@@ -166,3 +167,39 @@ console.log(account.latest);
 
 account.latest = 50;
 console.log(account.movements);
+*/
+
+// Constructor Function
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+// const jonas = new Person(`Jonas`, 1991);
+
+Person.hey = function () {
+  console.log(`Hey there 👋`);
+  console.log(this);
+};
+Person.hey();
+// jonas.hey();
+
+// Classes
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Instance methods
+  static hey() {
+    console.log(`Hey there 👋`);
+    console.log(this);
+  }
+}
+
+PersonCl.hey();
+
+// console.log(Array.from(document.querySelectorAll(`h1`)));
+// [1, 2, 3].from();
+console.log(Number.parseFloat(`12c`));
