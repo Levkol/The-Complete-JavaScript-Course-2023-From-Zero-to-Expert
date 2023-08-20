@@ -169,6 +169,7 @@ account.latest = 50;
 console.log(account.movements);
 */
 
+/*
 // Constructor Function
 const Person = function (firstName, birthYear) {
   this.firstName = firstName;
@@ -203,3 +204,28 @@ PersonCl.hey();
 // console.log(Array.from(document.querySelectorAll(`h1`)));
 // [1, 2, 3].from();
 console.log(Number.parseFloat(`12c`));
+*/
+
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = `Steven`;
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__);
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init(`Sarah`, 1979);
+sarah.calcAge();
