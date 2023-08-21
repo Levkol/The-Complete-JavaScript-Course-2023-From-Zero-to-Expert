@@ -68,8 +68,25 @@ console.log(arr.unique());
 const h1 = document.querySelector(`h1`);
 console.dir(x => x + 1);
 */
-/*
 ///////////////////////// Coding Challenge 1://///////////////////////
+/*
+Your tasks:
+1. Use a constructor function to implement a 'Car'. A car has a 'make' and a
+'speed' property. The 'speed' property is the current speed of the car in
+km/h
+2. Implement an 'accelerate' method that will increase the car's speed by 10,
+and log the new speed to the console
+3. Implement a 'brake' method that will decrease the car's speed by 5, and log
+the new speed to the console
+4. Create 2 'Car' objects and experiment with calling 'accelerate' and
+'brake' multiple times on each of them
+Test data:
+§ Data car 1: 'BMW' going at 120 km/h
+§ Data car 2: 'Mercedes' going at 95 km/h
+GOOD LUCK 😀
+*/
+
+/*
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
@@ -234,6 +251,20 @@ sarah.calcAge();
 
 ////////////////// Coding Challenge 2/////////////////////////
 /*
+Your tasks:
+1. Re-create Challenge #1, but this time using an ES6 class (call it 'CarCl')
+2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide
+by 1.6)
+3. Add a setter called 'speedUS' which sets the current speed in mi/h (but
+converts it to km/h before storing the value, by multiplying the input by 1.6)
+4. Create a new car and experiment with the 'accelerate' and 'brake'
+methods, and with the getter and setter.
+Test data:
+§ Data car 1: 'Ford' going at 120 km/h
+GOOD LUCK 😀
+*/
+
+/*
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
@@ -334,6 +365,24 @@ console.dir(Student.prototype.constructor);
 */
 
 ////////////////// Coding Challenge 3 /////////////////////////
+/*
+Your tasks:
+1. Use a constructor function to implement an Electric Car (called 'EV') as a child
+"class" of 'Car'. Besides a make and current speed, the 'EV' also has the
+current battery charge in % ('charge' property)
+2. Implement a 'chargeBattery' method which takes an argument
+'chargeTo' and sets the battery charge to 'chargeTo'
+3. Implement an 'accelerate' method that will increase the car's speed by 20,
+and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140
+km/h, with a charge of 22%'
+4. Create an electric car object and experiment with calling 'accelerate',
+'brake' and 'chargeBattery' (charge to 90%). Notice what happens when
+you 'accelerate'! Hint: Review the definiton of polymorphism 😉
+Test data:
+§ Data car 1: 'Tesla' going at 120 km/h, with a charge of 23%
+GOOD LUCK 😀
+*/
+/*
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
@@ -373,6 +422,7 @@ tesla.chargeBattery(90);
 console.log(tesla);
 tesla.brake();
 tesla.accelerate();
+*/
 
 // class EV {
 //   constructor(make, speed, charge) {
@@ -411,3 +461,66 @@ tesla.accelerate();
 // console.log(tesla.speed, tesla.charge);
 // tesla.brake();
 // tesla.brake();
+
+/////////////////////////////////////////////////////////
+// Inheritance Between "Classes": ES6 Classes
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Instance methods
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(` `)) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static method
+  static hey() {
+    console.log(`Hey there 👋`);
+  }
+}
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // Always needs to happen first!
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  calcAge() {
+    console.log(
+      `I'm ${
+        2037 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+const martha = new StudentCl(`Martha Jones`, 2012, `Computer Science`);
+console.log(martha);
+martha.introduce();
+martha.calcAge();
