@@ -564,7 +564,7 @@ jay.calcAge();
 // 3) Public methods
 // 4) Private methods
 // there is also the static version
-
+/*
 class Account {
   // 1) Public fields (instances)
   local = navigator.language;
@@ -637,3 +637,56 @@ Account.helper();
 // Chaining
 acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
 console.log(acc1.getMovements());
+*/
+
+// Summary:
+class Person {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+}
+
+class Student extends Person {
+  university = `University of Lisbon`;
+  #studyHours = 0;
+  #course;
+  static numSubjects = 10;
+
+  constructor(fullName, birthYear, startYear, course) {
+    super(fullName, birthYear);
+
+    this.startYear = startYear;
+
+    this.#course = course;
+  }
+
+  introduce() {
+    console.log(`I study ${this.#course} at ${this.university}`);
+  }
+
+  study(h) {
+    this.#makeCoffe();
+    this.#studyHours += h;
+  }
+
+  #makeCoffe() {
+    return `Here is c a coffe for you`;
+  }
+
+  get testScore() {
+    return this._testScore;
+  }
+
+  set testScore(score) {
+    this._testScore = score <= 20 ? score : 0;
+  }
+
+  static printCurriculum() {
+    console.log(`There are ${this.numSubjects} subjects`);
+  }
+}
+
+const student = new Student(`Jonas`, 2020, 2037, `Medicine`);
+
+student.introduce();
