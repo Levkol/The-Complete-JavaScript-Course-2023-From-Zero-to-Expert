@@ -32,5 +32,5 @@ request.addEventListener(`load`, function(){
 };
 
 getCountryData(`portugal`);
-getCountryData(`usa`)
-getCountryData(`hungary`)
+getCountryData(`usa`);
+getCountryData(`hungary`);
