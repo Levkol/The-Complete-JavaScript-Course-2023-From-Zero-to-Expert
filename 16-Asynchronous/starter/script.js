@@ -178,7 +178,8 @@ const getCountryData = function(country){
     .then(data => {
         renderCountry(data[0]);
         const neighbour = data[0].borders?.[0];
-        throw new Error(`No neigbour found!`);
+
+        if(!neighbour) throw new Error(`No neigbour found!`);
 
         // Country 2
         return getJSON(`https://restcountries.com/v2/alpha/${neighbour}`, `Country not found`);
