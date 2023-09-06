@@ -3,28 +3,31 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
-const renderCountry = function(data, className){
-    const html = `
+const renderCountry = function (data, className) {
+  const html = `
     <article class="country ${className}">
         <img class="country__img" src="${data.flag}" />
         <div class="country__data">
             <h3 class="country__name">${data.name}</h3>
             <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)} people</p>
+            <p class="country__row"><span>👫</span>${(
+              +data.population / 1000000
+            ).toFixed(1)} people</p>
             <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+            <p class="country__row"><span>💰</span>${
+              data.currencies[0].name
+            }</p>
         </div>
     </article>
     `;
-    countriesContainer.insertAdjacentHTML(`beforeend`, html);
-    countriesContainer.style.opacity = 1;
+  countriesContainer.insertAdjacentHTML(`beforeend`, html);
+  countriesContainer.style.opacity = 1;
 };
 
-const renderError = function(msg){
-    countriesContainer.insertAdjacentText(`beforeend`, msg);
-    countriesContainer.style.opacity = 1;
-}
-
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText(`beforeend`, msg);
+  countriesContainer.style.opacity = 1;
+};
 
 ///////////////////////////////////////
 // const getCountryData = function(country){
@@ -59,7 +62,6 @@ const renderError = function(msg){
 // getCountryData(`hungary`);
 
 ////////////////////////////////////////////////////////////////////////
- 
 
 // const getCountryAndNeighbour = function(country){
 
@@ -72,15 +74,15 @@ const renderError = function(msg){
 //         // const data = JSON.parse(this.responseText)[0];
 //         const [data] = JSON.parse(this.responseText);
 //         console.log(data);
-        
+
 //         // Render country 1
 //         renderCountry(data);
-        
+
 //         // Get neighbour country 2
 //         const [neighbour] = data.borders;
 
 //         if(!neighbour) return;
-        
+
 //         // AJAX call country 2
 //         const request2 = new XMLHttpRequest();
 //         request2.open(`GET`, `https://restcountries.com/v2/alpha/${neighbour}`);
@@ -159,7 +161,6 @@ const renderError = function(msg){
 
 // // getCountryData(`dwadads`);
 
-
 ////////////////////////////////////////////////////////////////////////
 
 // const getJSON = function(url, errorMsg = `Something went wrong`){
@@ -184,7 +185,7 @@ const renderError = function(msg){
 //         // Country 2
 //         return getJSON(`https://restcountries.com/v2/alpha/${neighbour}`, `Country not found`);
 //     })
- 
+
 //     .then(data => renderCountry(data, `neighbour`))
 //     .catch(err => {
 //         console.error(`${err} 💥💥💥`);
@@ -202,7 +203,7 @@ const renderError = function(msg){
 // getCountryData(`australia`);
 
 //////////////////////////////////// Coding Challenge 1 ////////////////////////////////////
- 
+/*
 const whereAmI = function(lat, lng){
     fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=612648208122039376989x45602`)
     
@@ -231,4 +232,20 @@ const whereAmI = function(lat, lng){
 whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
+*/
 
+// console.log(`Test start`); // 1
+// setTimeout(() => console.log(`0 sec timer`), 0); // 4
+// Promise.resolve(`Resolve promise 1`).then(res => console.log(res)); // 3
+// console.log(`Test end`); // 2
+
+console.log(`Test start`); // 1
+setTimeout(() => console.log(`0 sec timer`), 0); // 5
+Promise.resolve(`Resolve promise 1`).then(res => console.log(res)); // 3
+
+Promise.resolve(`Resolve promise 2`).then(res => {
+  for (let i = 0; i < 1000000000; i++) {}
+  console.log(res);
+}); // 4
+
+console.log(`Test end`); // 2
