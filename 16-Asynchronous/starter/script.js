@@ -413,6 +413,39 @@ createImage(`img/img-1.jpg`)
 // fetch(`https://restcountries.com/v2/name/${country}`).then(res =>
 //   console.log(res));
 
+// const getPosition = function () {
+//   return new Promise(function (resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+
+// const whereAmI = async function () {
+//   // Geolocation
+//   const pos = await getPosition();
+//   const { latitude: lat, longitude: lng } = pos.coords;
+
+//   // Reverse geocoding
+//   const resGeo = await fetch(
+//     `https://geocode.xyz/${lat},${lng}?geoit=json&auth=612648208122039376989x45602`
+//   );
+//   const dataGeo = await resGeo.json();
+//   console.log(dataGeo);
+
+//   // Country data
+//   const res = await fetch(
+//     `https://restcountries.com/v2/name/${dataGeo.country}`
+//   );
+//   const data = await res.json();
+//   console.log(data);
+//   renderCountry(data[0]);
+// };
+
+// whereAmI();
+// console.log(`FIRST`);
+
+///////////////////////////////////////////////////////////
+// Error Handling With try...catch:
+
 const getPosition = function () {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -420,25 +453,50 @@ const getPosition = function () {
 };
 
 const whereAmI = async function () {
-  // Geolocation
-  const pos = await getPosition();
-  const { latitude: lat, longitude: lng } = pos.coords;
+  try {
+    // Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
 
-  // Reverse geocoding
-  const resGeo = await fetch(
-    `https://geocode.xyz/${lat},${lng}?geoit=json&auth=612648208122039376989x45602`
-  );
-  const dataGeo = await resGeo.json();
-  console.log(dataGeo);
+    // Reverse geocoding
+    const resGeo = await fetch(
+      `https://geocode.xyz/${lat},${lng}?geoit=json&auth=612648208122039376989x45602`
+    );
+    if (!resGeo.ok) throw new Error(`Problem getting location data`);
 
-  // Country data
-  const res = await fetch(
-    `https://restcountries.com/v2/name/${dataGeo.country}`
-  );
-  const data = await res.json();
-  console.log(data);
-  renderCountry(data[0]);
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
+
+    // Country data
+    const res = await fetch(
+      `https://restcountries.com/v2/name/${dataGeo.country}`
+    );
+    if (!res.ok) throw new Error(`Problem getting location data`);
+
+    const data = await res.json();
+    console.log(data);
+    renderCountry(data[0]);
+  } catch (err) {
+    console.error(`${err} 💥`);
+    renderError(`Something went wrong 💥 ${err.message}`);
+  }
 };
 
 whereAmI();
+whereAmI();
+whereAmI();
+whereAmI();
+
 console.log(`FIRST`);
+
+// let y = 1;
+// const x = 2;
+// x = 3;
+
+// try {
+//   let y = 1;
+//   const x = 2;
+//   x = 3;
+// } catch (err) {
+//   alert(err.message);
+// }
