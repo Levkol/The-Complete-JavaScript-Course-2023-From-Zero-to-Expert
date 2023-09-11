@@ -597,6 +597,7 @@ get3Country(`portugal`, `hungary`, `russia`);
 
 ///////////////////////////////////////////////////////////
 // Other Promise Combinators: race, allSettled and any:
+/*
 
 // Promise.race
 (async function () {
@@ -647,3 +648,41 @@ Promise.any([
 ])
   .then(res => console.log(res))
   .catch(err => console.error(err));
+
+  */
+
+/////////////////////////// Practice Coding Challenges:///////////////////////////
+/////////////////////////// Coding Challenge 1://////////////////////////
+const whereAmI = function (lat, lng) {
+  fetch(
+    `https://geocode.xyz/${lat},${lng}?geoit=json&auth=612648208122039376989x45602`
+  )
+    .then(response => {
+      console.log(response);
+      if (!response.ok)
+        throw new Error(`Problem with the geocoding ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(`You are in ${data?.city}, ${data?.country}`);
+
+      return fetch(`https://restcountries.com/v2/name/${data.country}`);
+    })
+    .then(response => {
+      if (!response.ok) throw new Error(`Country not found ${response.status}`);
+      return response.json();
+    })
+    .then(data => renderCountry(data[0]))
+    .catch(err => {
+      console.error(`Something went wrong (${err.message}). Try again!`);
+    });
+};
+
+whereAmI(52.508, 13.381);
+
+/*
+Coordinates 1: 52.508, 13.381 (Latitude, Longitude)
+§ Coordinates 2: 19.037, 72.873
+§ Coordinates 3: -33.933, 18.474
+*/
