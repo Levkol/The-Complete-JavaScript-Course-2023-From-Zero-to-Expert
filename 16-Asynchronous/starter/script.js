@@ -653,6 +653,7 @@ Promise.any([
 
 /////////////////////////// Practice Coding Challenges:///////////////////////////
 /////////////////////////// Coding Challenge 1://////////////////////////
+/*
 const whereAmI = function (lat, lng) {
   fetch(
     `https://geocode.xyz/${lat},${lng}?geoit=json&auth=612648208122039376989x45602`
@@ -680,9 +681,100 @@ const whereAmI = function (lat, lng) {
 };
 
 whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+// whereAmI(-33.933, 18.474);
+*/
 
 /*
 Coordinates 1: 52.508, 13.381 (Latitude, Longitude)
 § Coordinates 2: 19.037, 72.873
 § Coordinates 3: -33.933, 18.474
 */
+
+/////////////////////////// Coding Challenge 2://////////////////////////
+/*
+
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+const imgContainer = document.querySelector(`.images`);
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement(`img`);
+    img.src = imgPath;
+
+    img.addEventListener(`load`, function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener(`error`, function () {
+      reject(new Error(`Image not found`));
+    });
+  });
+};
+
+let currentImg;
+
+createImage(`img/img-1.jpg`)
+  .then(img => {
+    currentImg = img;
+    console.log(`Image 1 loaded`);
+    return wait(2);
+  })
+  .then(() => {
+    currentImg.style.display = `none`;
+    return createImage(`img/img-2.jpg`);
+  })
+  .then(img => {
+    currentImg = img;
+    console.log(`Image 2 loaded`);
+    return wait(2);
+  })
+  .then(() => {
+    currentImg.style.display = `none`;
+  })
+  .catch(err => console.error(err));
+  */
+
+  /////////////////////////// Coding Challenge 3://////////////////////////
+  const wait = function (seconds) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, seconds * 1000);
+    });
+  };
+  
+  const imgContainer = document.querySelector(`.images`);
+  
+  const createImage = function (imgPath) {
+    return new Promise(function (resolve, reject) {
+      const img = document.createElement(`img`);
+      img.src = imgPath;
+  
+      img.addEventListener(`load`, function () {
+        imgContainer.append(img);
+        resolve(img);
+      });
+  
+      img.addEventListener(`error`, function () {
+        reject(new Error(`Image not found`));
+      });
+    });
+  };
+
+  let currentImg;
+  
+  const loadNPause = async function(){
+    try{
+      const img = await createImage(`img/img-1.jpg`)
+      currentImg = img;
+      console.log(`Image 1 loaded`);
+      await wait(2);
+    } catch (err) {
+      console.error(`${err} 💥`)
+    }
+  };
