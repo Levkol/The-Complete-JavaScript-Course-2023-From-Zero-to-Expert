@@ -3,7 +3,7 @@
 // addToCart('bread', 5);
 // console.log(price, tq);
 
-console.log('Importing module');
+// console.log('Importing module');
 // console.log(shippingCost);
 
 // import * as ShoppingCart from './shoppingCart.js';
@@ -14,11 +14,11 @@ console.log('Importing module');
 // add(`pizza`, 2);
 // console.log(price);
 
-import add, { cart } from './shoppingCart.js';
-add(`pizza`, 2);
-add(`bread`, 5);
-add(`apples`, 4);
-console.log(cart);
+// import add, { cart } from './shoppingCart.js';
+// add(`pizza`, 2);
+// add(`bread`, 5);
+// add(`apples`, 4);
+// console.log(cart);
 
 ///////////////////// Top level await
 /*
@@ -95,6 +95,7 @@ const { addToCart } = requrie('./shoppingCart.js')
 */
 
 ///////////////////// Introduction to NPM
+/*
 
 // import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
 import cloneDeep from 'lodash-es';
@@ -139,3 +140,4 @@ import 'core-js/stable';
 
 // Polyfilling async functions
 import 'regenerator-runtime/runtime';
+*/
